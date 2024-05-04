@@ -56,7 +56,7 @@ struct PlaybackPos;
 
 fn ui_update(
     mut q_ui: Query<&mut Text, With<PlaybackPos>>,
-    q_audio: Query<&AudioHandle<AudioFile>, With<InteractiveSound>>,
+    q_audio: Query<&AudioHandle, With<InteractiveSound>>,
 ) {
     let mut text = q_ui.single_mut();
     let audio_handle_result = q_audio.get_single();

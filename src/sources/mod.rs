@@ -2,6 +2,7 @@
 pub mod audio_file;
 
 use crate::backend::AudioBackend;
+use crate::prelude::AudioFile;
 use crate::spatial::SpatialEmitterHandle;
 
 use crate::{AudioPlaybackSet, AudioSourceSetup, AudioWorld, InternalAudioMarker};
@@ -50,14 +51,14 @@ pub trait AudioSource: Asset {
 /// Component holding a handle to an [`AudioSource`]. Access this component from your systems to
 /// control the parameters of the sound from Bevy.
 #[derive(Debug, Deref, DerefMut, Component)]
-pub struct AudioHandle<T: AudioSource>(pub T::Handle);
+pub struct AudioHandle<T: AudioSource = AudioFile>(pub T::Handle);
 
 /// Audio source plugin, which should be added for each type of [`AudioSource`] you want to use
 /// in your game.
 #[derive(Debug)]
-pub struct AudioSourcePlugin<T>(PhantomData<T>);
+pub struct AudioSourcePlugin<T: AudioSource = AudioFile>(PhantomData<T>);
 
-impl<T> Default for AudioSourcePlugin<T> {
+impl<T: AudioSource> Default for AudioSourcePlugin<T> {
     fn default() -> Self {
         Self(PhantomData)
     }

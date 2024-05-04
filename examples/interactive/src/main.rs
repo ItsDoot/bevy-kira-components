@@ -55,7 +55,7 @@ fn handle_interactive_sound(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     keyboard: Res<ButtonInput<KeyCode>>,
-    mut q: Query<(&mut AudioHandle<AudioFile>, &mut Sprite), With<InteractiveSound>>,
+    mut q: Query<(&mut AudioHandle, &mut Sprite), With<InteractiveSound>>,
 ) {
     if keyboard.just_pressed(KeyCode::KeyA) {
         commands.spawn((

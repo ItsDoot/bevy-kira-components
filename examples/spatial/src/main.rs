@@ -133,15 +133,7 @@ const SPEED_OF_SOUND: f32 = 20.0;
 
 // Fake the doppler pitch shift effect by playing the loop faster or slower
 fn fake_doppler_effect(
-    mut q: Query<
-        (
-            &mut AudioHandle<AudioFile>,
-            &mut Doppler,
-            &GlobalTransform,
-            &Motion,
-        ),
-        With<SpatialEmitter>,
-    >,
+    mut q: Query<(&mut AudioHandle, &mut Doppler, &GlobalTransform, &Motion), With<SpatialEmitter>>,
     q_cameras: Query<(&GlobalTransform, &Motion), With<FpsCam>>,
 ) {
     let Ok((cam_transform, cam_motion)) = q_cameras.get_single() else {

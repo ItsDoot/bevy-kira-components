@@ -66,11 +66,7 @@ pub enum AudioFileEndBehavior {
 
 fn on_audio_file_ended(
     mut commands: Commands,
-    q_sources: Query<(
-        Entity,
-        &AudioHandle<AudioFile>,
-        Option<&AudioFileEndBehavior>,
-    )>,
+    q_sources: Query<(Entity, &AudioHandle, Option<&AudioFileEndBehavior>)>,
 ) {
     for (entity, AudioHandle(handle), end_behavior) in &q_sources {
         if matches!(handle.playback_state(), PlaybackState::Stopped) {
