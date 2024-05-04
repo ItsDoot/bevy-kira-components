@@ -135,7 +135,7 @@ const SPEED_OF_SOUND: f32 = 20.0;
 fn fake_doppler_effect(
     mut q: Query<
         (
-            &mut AudioHandle<AudioFileHandle>,
+            &mut AudioHandle<AudioFile>,
             &mut Doppler,
             &GlobalTransform,
             &Motion,

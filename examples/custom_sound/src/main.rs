@@ -4,7 +4,7 @@ use bevy::prelude::*;
 use bevy_kira_components::sources::AudioBundle;
 use bevy_kira_components::{kira::tween::Tween, prelude::*};
 use diagnostics_ui::DiagnosticsUiPlugin;
-use sine_wave::{SineWave, SineWaveHandle, SineWavePlugin, SineWaveSettings};
+use sine_wave::{SineWave, SineWavePlugin, SineWaveSettings};
 
 mod sine_wave;
 
@@ -43,10 +43,7 @@ fn add_sounds(mut commands: Commands, mut sine_waves: ResMut<Assets<SineWave>>) 
 
 #[allow(clippy::type_complexity)]
 fn control_sounds(
-    mut q: Query<
-        &mut AudioHandle<SineWaveHandle>,
-        (With<MySine>, Added<AudioHandle<SineWaveHandle>>),
-    >,
+    mut q: Query<&mut AudioHandle<SineWave>, (With<MySine>, Added<AudioHandle<SineWave>>)>,
 ) {
     let Ok(mut handle) = q.get_single_mut() else {
         return;

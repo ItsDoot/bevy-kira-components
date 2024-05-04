@@ -1,7 +1,7 @@
 use bevy::app::{App, Plugin};
 use bevy::prelude::*;
 
-use bevy_kira_components::sources::audio_file::source::AudioFileHandle;
+use bevy_kira_components::sources::audio_file::source::AudioFile;
 use bevy_kira_components::sources::AudioHandle;
 
 use crate::InteractiveSound;
@@ -56,7 +56,7 @@ struct PlaybackPos;
 
 fn ui_update(
     mut q_ui: Query<&mut Text, With<PlaybackPos>>,
-    q_audio: Query<&AudioHandle<AudioFileHandle>, With<InteractiveSound>>,
+    q_audio: Query<&AudioHandle<AudioFile>, With<InteractiveSound>>,
 ) {
     let mut text = q_ui.single_mut();
     let audio_handle_result = q_audio.get_single();

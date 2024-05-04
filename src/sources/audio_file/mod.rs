@@ -14,7 +14,7 @@ use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
 use crate::AudioPlaybackSet;
-use crate::prelude::{AudioFile, AudioFileHandle, AudioFileLoader};
+use crate::prelude::{AudioFile, AudioFileLoader};
 
 use super::{AudioBundle, AudioHandle, AudioSourcePlugin};
 
@@ -24,9 +24,7 @@ pub mod source;
 #[doc(hidden)]
 #[allow(missing_docs)]
 pub mod prelude {
-    pub use super::{
-        AudioFileBundle, AudioFileEndBehavior, AudioFileError, AudioFileSettings,
-    };
+    pub use super::{AudioFileBundle, AudioFileEndBehavior, AudioFileError, AudioFileSettings};
     pub use super::loader::*;
     pub use super::source::*;
 }
@@ -70,7 +68,7 @@ fn on_audio_file_ended(
     mut commands: Commands,
     q_sources: Query<(
         Entity,
-        &AudioHandle<AudioFileHandle>,
+        &AudioHandle<AudioFile>,
         Option<&AudioFileEndBehavior>,
     )>,
 ) {

@@ -50,7 +50,7 @@ pub trait AudioSource: Asset {
 /// Component holding a handle to an [`AudioSource`]. Access this component from your systems to
 /// control the parameters of the sound from Bevy.
 #[derive(Debug, Deref, DerefMut, Component)]
-pub struct AudioHandle<T>(pub T);
+pub struct AudioHandle<T: AudioSource>(pub T::Handle);
 
 /// Audio source plugin, which should be added for each type of [`AudioSource`] you want to use
 /// in your game.
@@ -124,7 +124,7 @@ impl<T: AudioSource> AudioSourcePlugin<T> {
                 Option<&SpatialEmitterHandle>,
                 &OutputDestination,
             ),
-            Without<AudioHandle<T::Handle>>,
+            Without<AudioHandle<T>>,
         >,
     ) {
         let main_track_handle = audio_world.audio_manager.main_track();
@@ -161,7 +161,7 @@ impl<T: AudioSource> AudioSourcePlugin<T> {
                 }
             };
             debug!("Added sound for {} in {entity:?}", T::type_path());
-            commands.entity(entity).insert(AudioHandle(handle));
+            commands.entity(entity).insert(AudioHandle::<T>(handle));
         }
     }
 }
